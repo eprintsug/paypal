@@ -29,11 +29,11 @@ sub can_be_viewed
 	return 1;
 }
 
-#sub render_action_link
-#{
-#	my( $self, %opts ) = @_;
-#
-#	return $link;
-#}
+sub render_action_link
+{
+	my( $self, %opts ) = @_;
+
+	return $self->html_phrase( "btn" );
+}
 
 1;

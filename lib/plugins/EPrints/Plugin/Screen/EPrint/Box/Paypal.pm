@@ -35,10 +35,21 @@ sub render
 	my( $self ) = @_;
 
 	my $repo = $self->{repository};
+	my $eprint = $self->{processor}->{eprint};
+
+	my( $currency, $price, $shipping, $tax ) = $repo->call( [ "paypal", "price_for_eprint" ], $self->{procesor}->{eprint} );
+	my $button = $eprint->render_citation( "paypal", 
+		currency => [ $currency, "STRING" ],
+		price => [ $price, "STRING" ],
+		shipping => [ $shipping, "STRING" ],
+		tax => [ $tax, "STRING" ],
+	);
+
 	return $self->html_phrase(
 		"content",
-		price => $self->{repository}->xml->create_text_node( $repo->call( [ "paypal", "price_for_eprint" ], $self->{procesor}->{eprint} ) ),
-		currency => $self->{repository}->xml->create_text_node( $repo->config( "paypal", "currency" ) ),
+		price => $self->{repository}->xml->create_text_node( $price ),
+		currency => $self->{repository}->xml->create_text_node( $currency ),
+		button => $button,
 	);
 }
 

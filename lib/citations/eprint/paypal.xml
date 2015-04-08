@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html SYSTEM "entities.dtd">
+<cite:citation xmlns="http://www.w3.org/1999/xhtml" xmlns:cite="http://eprints.org/ep3/citation" xmlns:epc="http://eprints.org/ep3/control">
+<script async="async" src="{$config{rel_path}}/javascript/paypal-button.min.js?merchant={$config{paypal}{merchantid}}"
+    data-button="cart" 
+    data-name="{title}" 
+    data-quantity="1"
+    data-amount="{$price}"
+    data-currency="{$currency}" 
+    data-shipping="{$shipping}"
+    data-tax="{$tax}" 
+    data-callback="{$config{paypal}{callback}}" 
+    data-env="sandbox"
+/>
+</cite:citation>

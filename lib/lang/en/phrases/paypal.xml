@@ -3,12 +3,24 @@
 
 <epp:phrases xmlns="http://www.w3.org/1999/xhtml" xmlns:epp="http://eprints.org/ep3/phrase" xmlns:epc="http://eprints.org/ep3/control">
 
-<epp:phrase id="Plugin/Screen/Paypal:title">Paypal Checkout</epp:phrase>
 
 <epp:phrase id="Plugin/Screen/EPrint/Box/Paypal:title">Add to basket</epp:phrase>
 <epp:phrase id="Plugin/Screen/EPrint/Box/Paypal:content">
-<p>Get access to restricted items.</p>
-<p><span class="paypal_price"><epc:pin name="price"/></span> <span class="paypal_currency"><epc:pin name="currency"/></span></p>
+	<div class="paypal-content">
+		<div class="paypal-content-header">Get access to restricted items:</div>
+		<div class="paypal-content-price"><span class="paypal_price"><epc:pin name="price"/></span> <span class="paypal_currency"><epc:pin name="currency"/></span></div>
+		<div class="paypal-content-add"><epc:pin name="button"/></div>
+	</div>
+</epp:phrase>
+
+<epp:phrase id="Plugin/Screen/Paypal:title">Paypal Checkout</epp:phrase>
+<epp:phrase id="Plugin/Screen/Paypal:btn">
+	<form name="_xclick" target="paypal" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+		<input type="hidden" name="cmd" value="_cart"/>
+		<input type="hidden" name="business" value="{$config{paypal}{merchantid}}"/>
+		<input type="image" src="https://www.paypal.com/en_US/i/btn/view_cart.gif" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!"/>
+		<input type="hidden" name="display" value="1"/>
+	</form>
 </epp:phrase>
 
 </epp:phrases>
