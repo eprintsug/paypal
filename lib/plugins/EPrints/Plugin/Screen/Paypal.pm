@@ -26,7 +26,7 @@ sub can_be_viewed
 {
 	my( $self ) = @_;
 
-	return 1;
+	return defined $self->{repository}->current_user;
 }
 
 sub render_action_link
