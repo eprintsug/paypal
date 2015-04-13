@@ -1,0 +1,27 @@
+
+use Business::PayPal::IPN;
+use EPrints;
+use strict;
+
+# use sandbox
+$Business::PayPal::IPN::GTW = 'https://www.sandbox.paypal.com/cgi-bin/webscr';
+
+my $ipn = new Business::PayPal::IPN() or die Business::PayPal::IPN->error();
+
+if ( $ipn->completed ) {
+	# check the $payment_status=Completed
+	# check that $txn_id has not been previously processed
+	# check that $receiver_email is your Primary PayPal email
+	# check that $payment_amount/$payment_currency are correct
+	# process payment
+}
+else
+{
+	# log
+}
+
+print $ipn->cgi->header('text/plain');
+
+my $eprints = EPrints->new;
+my $repo = $eprints->current_repository;
+exit( 0 ) unless( defined $repo );
