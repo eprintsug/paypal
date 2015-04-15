@@ -1,6 +1,7 @@
 use Business::PayPal::IPN;
-use JSON;
+use Date::Parse;
 use EPrints;
+use JSON;
 use strict;
 
 # use sandbox
@@ -9,7 +10,7 @@ $Business::PayPal::IPN::GTW = 'https://www.sandbox.paypal.com/cgi-bin/webscr';
 my $ipn = new Business::PayPal::IPN() or die Business::PayPal::IPN->error();
 
 unless( $ipn->completed ) {
-	# TODO log
+	&log( "received incomplete txn" );
 	exit;
 }
 
@@ -23,14 +24,14 @@ exit( 0 ) unless( defined $repo );
 # check the receiver_email
 unless( $ipn->receiver_email eq $repo->config( qw( paypal merchantid ) ) )
 {
-	# TODO log
+	&log( "bad receiver email in txn: " . $ipn->receiver_email );
 	exit;
 }
 
 # check its a transaction we expect (shopping cart transaction)
 unless( $ipn->txn_type eq "cart" )
 {
-	# TODO log
+	&log( "bad txn_type in txn: " . $ipn->txn_type );
 	exit;
 }
 
@@ -42,7 +43,7 @@ my $list = $repo->dataset( "paypal_order" )->search(
 );
 if( $list->count )
 {
-	# TODO log
+	&log( "duplicate ipn for txn" );
 	exit;
 }
 
@@ -52,10 +53,18 @@ if( $list->count )
 my %ipndata = $ipn->vars;
 
 my %epdata;
-foreach my $field ( $repo->dataset( "paypal_orders" )->fields )
+foreach my $field ( $repo->dataset( "paypal_order" )->fields )
 {
-	next unless EPrints::Utils::is_set( $ipndata{$field->name} );
-	$epdata{$field->name} = $ipndata{$field->name};
+	my $name = $field->name;
+	next unless EPrints::Utils::is_set( $ipndata{$name} );
+
+	if( $name eq "payment_date" )
+	{
+		my $s = str2time( $ipn->payment_date ); # epoch seconds
+		$epdata{$name} = EPrints::Time::iso_datetime( EPrints::Time::local_datetime( $s ) );
+	}
+
+	$epdata{$name} = $ipndata{$name};
 }
 
 $epdata{_raw} = to_json( \%ipndata );
@@ -65,9 +74,9 @@ my @items;
 for( 1..$ipn->num_cart_items )
 {
 	push @items, {
-		name => $ipndata{"item_name_$_"},
-		number => $ipndata{"item_number_$_"},
-		gross => $ipndata{"mc_gross_$_"},
+		name => $ipndata{"item_name$_"},
+		number => $ipndata{"item_number$_"},
+		gross => $ipndata{"mc_gross$_"},
 	}
 }
 $epdata{items} = \@items;
@@ -75,8 +84,13 @@ $epdata{items} = \@items;
 my $order = $repo->dataset( "paypal_order" )->create_dataobj( \%epdata );
 unless( defined $order )
 {
-	# TODO log
+	&log( "failed to created paypal_order dataobj" );
 	exit;
 }
 
 $order->commit;
+
+sub log
+{
+	$repo->log( sprintf( "paypal (txn_id %s): %s", $ipn->txn_id, $_[0] ) );
+}
