@@ -16,48 +16,54 @@ $c->{paypal}->{user_has_purchased} = sub {
 	return 0;
 };
 
-__DATA__
+# orders are a subobject of user
+$c->add_dataset_field( "user", { name => "paypal_orders", type=>"subobject", datasetid=>"paypal_order", multiple=>1, text_index=>1, dataobj_fieldname=>"eprintid" } );
 
 $c->{datasets}->{paypal_order} = {
 	class => "EPrints::DataObj::PaypalOrder",
 	sqlname => "paypal_order",
 	name => "paypal_order",
-	columns => [qw()],
+	columns => [qw( tx_id payment_date num_cart_items )],
 	index => 1,
 	import => 1,
-	search => {
-		simple => {
-			search_fields => [],
-		},
-	},
+#	search => {
+#		simple => {
+#			search_fields => [],
+#		},
+#	},
 };
 
 # https://developer.paypal.com/docs/classic/ipn/integration-guide/IPNandPDTVariables/
-# txn_id 
-# payer_email
-# items (name, number)
-# txn_type (=cart)
-# num_cart_items
-# payment_date
-# mc_currency
-# mc_gross
-# payment_status (= completed)
-# receiver_email (=check)
-# mc_gross_x (=check)
+push @{ $c->{paypal}->{profile} },
+{ name => "txn_id", type => "text" },
+{ name => "payer_email", type => "email" },
+{ name => "items", type => "compound", multiple => 1, fields => [
+	{ sub_name => "name", type => "text" },
+	{ sub_name => "number", type => "text" },
+	{ sub_name => "gross", type => "text" },
+]},
+{ name => "num_cart_items", type => "int" },
+{ name => "payment_date", type => "date" },
+{ name => "mc_currency", type => "text" },
+{ name => "mc_gross", type => "text" },
+{ name => "_raw", type => "longtext" },
+;
 
-$c->add_dataset_field( "paypal_order", { name=>"eprintid", type=>"itemref", datasetid=>"eprint", required=>1} );
-$c->add_dataset_field( "paypal_order", {} );
-$c->add_dataset_field( "paypal_order", {} );
-$c->add_dataset_field( "paypal_order", {} );
-$c->add_dataset_field( "paypal_order", {} );
-$c->add_dataset_field( "paypal_order", {} );
-
-$c->add_dataset_field( "user", { type=>"subobject", datasetid=>"paypal_order", multiple=>1, text_index=>1, dataobj_fieldname=>"eprintid" } );
+for(  @{ $c->{paypal}->{profile} } )
+{
+	$c->add_dataset_field( "paypal_order", $_ );
+}
 
 {
 package EPrints::DataObj::PaypalOrder;
 
-sub get_dataset_id { "paypal_order" }
-
+sub get_system_field_info
+{
+	return (
+		{ name => "eprintid", type => "itemref", datasetid => "eprint", required => 1 },
+	);
 }
 
+sub get_dataset_id { "paypal_order" }
+
+} # end package
