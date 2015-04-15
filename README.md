@@ -31,7 +31,7 @@
 		       </ul>
 		     </td>
 	+            <epc:if test="$doc.property('security') = 'paypal'">
-	+              <td class="paypal_container ep_only_js" data-docid="{$doc.property('docid')}"/>
+	+              <td class="paypal-container ep_only_js" data-docid="{$doc.property('docid')}"/>
 	+            </epc:if>
 		   </tr>
 		 </epc:foreach>
