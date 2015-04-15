@@ -60,7 +60,7 @@ package EPrints::DataObj::PaypalOrder;
 sub get_system_field_info
 {
 	return (
-		{ name => "eprintid", type => "itemref", datasetid => "eprint", required => 1 },
+		{ name => "userid", type => "itemref", datasetid => "user", required => 1 },
 	);
 }
 
