@@ -1,17 +1,8 @@
-<?xml version="1.0" encoding="iso-8859-1" standalone="no" ?>
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <!DOCTYPE phrases SYSTEM "entities.dtd">
 
 <epp:phrases xmlns="http://www.w3.org/1999/xhtml" xmlns:epp="http://eprints.org/ep3/phrase" xmlns:epc="http://eprints.org/ep3/control">
 
-
-<epp:phrase id="Plugin/Screen/EPrint/Box/Paypal:title">Add to basket</epp:phrase>
-<epp:phrase id="Plugin/Screen/EPrint/Box/Paypal:content">
-	<div class="paypal-content">
-		<div class="paypal-content-header">Get access to restricted items:</div>
-		<div class="paypal-content-price"><span class="paypal_price"><epc:pin name="price"/></span> <span class="paypal_currency"><epc:pin name="currency"/></span></div>
-		<div class="paypal-content-add"><epc:pin name="button"/></div>
-	</div>
-</epp:phrase>
 
 <epp:phrase id="Plugin/Screen/Paypal:title">Paypal Checkout</epp:phrase>
 <epp:phrase id="Plugin/Screen/Paypal:btn">
@@ -22,5 +13,7 @@
 		<input type="hidden" name="display" value="1"/>
 	</form>
 </epp:phrase>
+
+<epp:phrase id="paypal_currency_EUR">€</epp:phrase>
 
 </epp:phrases>

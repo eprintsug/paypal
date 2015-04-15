@@ -1,9 +1,13 @@
 
+$c->{paypal}->{currency} = "EUR";
+
 $c->{paypal}->{price} = sub {
 	my( $user, $document ) = @_;
 
+	my $price = 5; # some derived price
+
 	# currency, price (set shipping and tax in paypal)
-	return ( "EUR", 5 );
+	return ( $user->repository->config( qw( paypal currency ) ), sprintf( "%.02f", $price )  );
 };
 
 # This ID can either be your Secure Merchant ID, which can be found by logging 

@@ -14,7 +14,9 @@ my $doc = $repo->dataset( "document" )->dataobj( $docid );
 exit unless defined $doc;
 
 exit unless $doc->value( "security" ) eq "paypal";
-exit if $doc->get_parent->value( "eprint_status" ) ne "archive";
+
+my $eprint = $doc->parent;
+exit unless defined $eprint && $eprint->value( "eprint_status" ) eq "archive";
 
 my $frag = $repo->xml->create_document_fragment;
 
@@ -35,6 +37,7 @@ else
 	my $button = $doc->render_citation( "paypal", 
 		currency => [ $currency, "STRING" ],
 		price => [ $price, "STRING" ],
+		userid => [ $user->get_id, "STRING" ],
 	);
 	$frag->appendChild( $button );
 }

@@ -1,0 +1,10 @@
+
+.paypal-container .paypal-price
+{
+	font-size: 2em;
+}
+
+.paypal-container .paypal-price .paypal-currency
+{
+	font-size: .8em;
+}

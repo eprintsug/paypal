@@ -2,8 +2,7 @@
 <!DOCTYPE html SYSTEM "entities.dtd">
 <cite:citation xmlns="http://www.w3.org/1999/xhtml" xmlns:cite="http://eprints.org/ep3/citation" xmlns:epc="http://eprints.org/ep3/control">
 <div class="paypal-container">
-  <div class="paypal-price"><epc:print expr="$price"/></div>
-  <div class="paypal-currency"><epc:print expr="$currency"/></div>
+  <div class="paypal-price"><span class="paypal-currency"><epc:phrase ref="paypal_currency_{$currency}"/></span><epc:print expr="$price"/></div>
   <form target="paypal" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
     <input type="hidden" name="business" value="{$config{paypal}{merchantid}}"/>
     <input type="hidden" name="cmd" value="_cart"/>
@@ -12,6 +11,7 @@
     <input type="hidden" name="item_number" value="{$item.uri()}"/>
     <input type="hidden" name="amount" value="{$price}"/>
     <input type="hidden" name="currency_code" value="{$currency}"/>
+    <input type="hidden" name="custom" value="{$userid}"/>
     <input type="image" name="submit" border="0" src="https://www.paypalobjects.com/en_US/i/btn/btn_cart_LG.gif"/>
     <img alt="" border="0" width="1" height="1" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" />
   </form>
