@@ -71,7 +71,7 @@ push @{ $c->{paypal}->{profile} },
 	{ sub_name => "gross", type => "text" },
 ]},
 { name => "num_cart_items", type => "int" },
-{ name => "payment_date", type => "date" },
+{ name => "payment_date", type => "time" },
 { name => "mc_currency", type => "text" },
 { name => "mc_gross", type => "text" },
 { name => "_raw", type => "longtext" },
@@ -84,6 +84,8 @@ for(  @{ $c->{paypal}->{profile} } )
 
 {
 package EPrints::DataObj::PaypalOrder;
+
+our @ISA = qw( EPrints::DataObj );
 
 sub get_system_field_info
 {
