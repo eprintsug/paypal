@@ -4,7 +4,7 @@
 
 
 	--- lib/defaultcfg/namedsets/security	2015-04-08 16:51:22.509117142 +0100
-	+++ archives/unesco/cfg/namedsets/security	2015-04-13 19:14:43.969585073 +0100
+	+++ archives/xxx/cfg/namedsets/security	2015-04-13 19:14:43.969585073 +0100
 	@@ -1,5 +1,6 @@
 	 # types for document security 
 	 
@@ -14,7 +14,7 @@
 	 staffonly
 
 	--- lib/defaultcfg/citations/eprint/summary_page.xml	2015-04-08 16:51:22.505117123 +0100
-	+++ archives/unesco/cfg/citations/eprint/summary_page.xml	2015-04-13 21:05:44.957255816 +0100
+	+++ archives/xxx/cfg/citations/eprint/summary_page.xml	2015-04-13 21:05:44.957255816 +0100
 	@@ -33,7 +33,9 @@
 		     <td valign="top" align="right"><epc:print expr="$doc.icon('HoverPreview','noNewWindow')}" /></td>
 		     <td valign="top">
