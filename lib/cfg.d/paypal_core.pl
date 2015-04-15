@@ -12,22 +12,15 @@ $c->{paypal}->{button} = sub {
 		return $repo->xml->create_doc_fragment;
 	}
 
-	if( $user->has_role( "editor" ) )
+	if( $repo->call( [qw( paypal can_user_view_document )], $user, $doc ) )
 	{
 		# direct access for admins
 		return $doc->render_citation( "paypal_admin" );
 	}
 
-	my $list = $repo->dataset( "paypal_order" )->search(
-		filters => [
-			{ meta_fields => [qw( userid )], value => $user->get_id, match => "EX" },
-			{ meta_fields => [qw( items_number )], value => $doc->get_id, match => "EX" },
-		],
-	);
-	my @orders = $list->get_records;
-	if( scalar @orders )
+	my $order = $repo->call( [qw( paypal get_order_for_document )], $user, $doc );
+	if( defined $order )
 	{
-		my $order = $orders[0];
 		# 'you purchased this on...'
 		return $doc->render_citation( "paypal_purchased",
 			payment_date => $order->render_value( "payment_date" ),
@@ -42,6 +35,31 @@ $c->{paypal}->{button} = sub {
 		price => [ $price, "STRING" ],
 		userid => [ $user->get_id, "STRING" ],
 	);
+};
+
+$c->{paypal}->{can_user_view_document} = sub {
+	my( $user, $doc ) = @_;
+
+	return 1 if $user->has_role( "editor" );
+	return 1 if $user->has_role( "admin" );
+	return 0;
+
+};
+
+$c->{paypal}->{get_order_for_document} = sub {
+	my( $user, $doc ) = @_;
+
+	my $repo = $user->repository;
+
+	my $list = $repo->dataset( "paypal_order" )->search(
+		filters => [
+			{ meta_fields => [qw( userid )], value => $user->get_id, match => "EX" },
+			{ meta_fields => [qw( items_number )], value => $doc->get_id, match => "EX" },
+		],
+	);
+
+	my @orders = $list->get_records;
+	return scalar @orders ? $orders[0] : undef;
 };
 
 # orders are a subobject of user

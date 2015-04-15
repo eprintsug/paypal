@@ -36,4 +36,18 @@
 		   </tr>
 		 </epc:foreach>
 	       </table>
-
+	--- lib/defaultcfg/cfg.d/security.pl	2015-04-08 16:51:22.505117123 +0100
+	+++ archives/unesco/cfg/cfg.d/security.pl	2015-04-15 20:40:18.181556480 +0100
+	@@ -127,6 +127,12 @@
+			
+		}
+	 
+	+	if( $security eq "paypal" )
+	+	{
+	+		return "ALLOW" if $doc->repository->call( [qw( paypal can_user_view_document )], $user, $doc );
+	+		return "ALLOW" if defined $doc->repository->call( [qw( paypal get_order_for_document )], $user, $doc );
+	+	}
+	+
+		$doc->repository->log( 
+	 "unrecognized user security flag '$security' on document ".$doc->get_id );
+		# Unknown security type, be paranoid and deny permission.
