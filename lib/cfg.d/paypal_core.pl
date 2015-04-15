@@ -2,18 +2,46 @@
 # On completion of a transaction you can get a payment notification (IPN) on a callback URL
 $c->{paypal}->{callback} = $c->{base_url} . '/paypal/callback';
 
-# can the given user download this document (eg. administrators)
-$c->{paypal}->{user_can_download} = sub {
-	my( $user, $document ) = @_;
+$c->{paypal}->{button} = sub {
+	my( $user, $doc ) = @_;
 
-	return 0;
-};
+	my $repo = $user->repository;
 
-# has the given user already purchased this document
-$c->{paypal}->{user_has_purchased} = sub {
-	my( $user, $document ) = @_;
+	unless( defined $user && defined $doc )
+	{
+		return $repo->xml->create_doc_fragment;
+	}
 
-	return 0;
+	if( $user->has_role( "editor" ) )
+	{
+		# direct access for admins
+		return $doc->render_citation( "paypal_admin" );
+	}
+
+	my $list = $repo->dataset( "paypal_order" )->search(
+		filters => [
+			{ meta_fields => [qw( userid )], value => $user->get_id, match => "EX" },
+			{ meta_fields => [qw( items_number )], value => $doc->get_id, match => "EX" },
+		],
+	);
+	my @orders = $list->get_records;
+	if( scalar @orders )
+	{
+		my $order = $orders[0];
+		# 'you purchased this on...'
+		return $doc->render_citation( "paypal_purchased",
+			payment_date => $order->render_value( "payment_date" ),
+			link => $repo->xml->render_link( $order->uri ),
+		);
+	}
+
+	# render 'add to cart' button
+	my( $currency, $price ) = $repo->call( [qw( paypal price )], $user, $doc );
+	return $doc->render_citation( "paypal_button", 
+		currency => [ $currency, "STRING" ],
+		price => [ $price, "STRING" ],
+		userid => [ $user->get_id, "STRING" ],
+	);
 };
 
 # orders are a subobject of user

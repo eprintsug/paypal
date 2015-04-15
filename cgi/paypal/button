@@ -18,32 +18,11 @@ exit unless $doc->value( "security" ) eq "paypal";
 my $eprint = $doc->parent;
 exit unless defined $eprint && $eprint->value( "eprint_status" ) eq "archive";
 
-my $frag = $repo->xml->create_document_fragment;
-
-if( $repo->call([qw( paypal user_can_download )], $user, $doc ) )
-{
-	# admin access
-	$frag->appendChild( $repo->xml->create_text_node( "Can download" ) );
-}
-elsif( my $order = $repo->call([qw( paypal user_has_purchased )], $user, $doc ) )
-{
-	# you purchased this doc on DD/MM/YYYY
-	$frag->appendChild( $repo->xml->create_text_node( "Purchased" ) );
-}
-else
-{
-	# render 'add to cart' button
-	my( $currency, $price ) = $repo->call( [qw( paypal price )], $user, $doc );
-	my $button = $doc->render_citation( "paypal", 
-		currency => [ $currency, "STRING" ],
-		price => [ $price, "STRING" ],
-		userid => [ $user->get_id, "STRING" ],
-	);
-	$frag->appendChild( $button );
-}
+my $button = $repo->call([qw( paypal button )], $user, $doc );
+exit unless defined $button;
 
 binmode(STDOUT, ":utf8");
 
 $repo->send_http_header( content_type=>"text/html; charset=UTF-8" );
-print $repo->xhtml->to_xhtml( $frag );
-$repo->xml->dispose( $frag );
+print $repo->xhtml->to_xhtml( $button );
+$repo->xml->dispose( $button );
