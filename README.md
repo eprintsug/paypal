@@ -20,14 +20,14 @@ In order to install from https://github.com/eprintsug/paypal/ you must have [git
     ```
     tools/epm link_lib paypal
     ```
-* configure "YOUR_ARCHIVE/cfg/cfg/paypal.pl"
-* customize your screen (See next session)
- 
 * enable paypal.epmi
 
     ```
     tools/epm enable YOUR_ARCHIVE paypal
     ```
+* configure "YOUR_ARCHIVE/cfg/cfg/paypal.pl"
+* customize your screen (See next session)
+* restart your webserver
 * start selling!
 
 ## Configuration
