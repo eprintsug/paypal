@@ -68,6 +68,7 @@ Where you want to display your "buy" button
 ```
 
 ### cfg/cfg.d/security.pl
+Add a section defining paypal roles.
 ```perl
 if( $security eq "paypal" ){
 	return "ALLOW" if $doc->repository->call( [qw( paypal can_user_view_document )], $user, $doc );
