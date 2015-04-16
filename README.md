@@ -52,7 +52,7 @@ should become
 
 public
 paypal
-{color:red}validuser
+validuser
 staffonly
 ```
 
