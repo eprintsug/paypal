@@ -35,6 +35,30 @@ In order to install from https://github.com/eprintsug/paypal/ you must have [git
 * start selling!
 
 ## Configuration
+Three files need to be customized. Such modifications depend on the level of customization of your repository. Here we present the situation compared to the originals you can find in ``` lib/defaultcfg ```
+
+### cfg/namedset/security
+```
+# types for document security
+
+public
+validuser
+staffonly
+```
+
+should become
+```
+# types for document security
+
+public
+paypal
+{color:red}validuser
+staffonly
+```
+
+### cfg/citations/eprint/summary_page.xml
+
+### cfg/cfg.d/security.pl
 
 
 	--- lib/defaultcfg/namedsets/security	2015-04-08 16:51:22.509117142 +0100
