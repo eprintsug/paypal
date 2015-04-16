@@ -1,5 +1,33 @@
 # Paypal shopping basket
 
+## Installation
+
+In order to install from https://github.com/eprintsug/paypal/ you must have [gitaar](https://github.com/eprintsug/gitaar) up and running on your EPrints.
+
+* cd to your eprints3 base root
+* pull in git-hosted package
+
+    ```
+    git submodule add https://github.com/eprintsug/paypal.git lib/epm/paypal 
+    ```
+* generate paypal.epmi
+
+    ```
+    gitaar/gitaar build_epmi YOUR_ARCHIVE paypal
+    ```
+* install paypal.epmi
+
+    ```
+    tools/epm link_lib paypal
+    ```
+* configure files (See next session)
+* enable paypal.epmi
+
+    ```
+    tools/epm enable YOUR_ARCHIVE paypal
+    ```
+* start selling!
+
 ## Configuration
 
 
