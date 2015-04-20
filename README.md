@@ -27,9 +27,13 @@ In order to install from https://github.com/eprintsug/paypal/ you must have [git
     ```
 * configure "YOUR_ARCHIVE/cfg/cfg/paypal.pl"
 * customize your screen [See next session](#configuration)
-* generate everythign
+* regenerate everything
     ```
     generate_static --prune YOUR_ARCHIVE && generate_abstracts YOUR_ARCHIVE  &&  generate_views YOUR_ARCHIVE && epadmin reload YOUR_ARCHIVE
+    ```
+* add the new fields to your repository
+    ```
+    epadmin update mediabank
     ```
 * restart your webserver
 * start selling!
