@@ -4,10 +4,22 @@ use EPrints;
 use JSON;
 use strict;
 
+my $eprints = EPrints->new;
+my $repo = $eprints->current_repository;
+exit( 0 ) unless( defined $repo );
+
+my $ua = new LWP::UserAgent;
+$ua->timeout(10);
+$ua->env_proxy;
+
+if ( $repo->config( "proxy" )){
+	$ua->proxy(['http', 'https', 'ftp'], $repo->config( "proxy" ));
+}
+
 # use sandbox
 $Business::PayPal::IPN::GTW = 'https://www.sandbox.paypal.com/cgi-bin/webscr';
 
-my $ipn = new Business::PayPal::IPN() or die Business::PayPal::IPN->error();
+my $ipn = new Business::PayPal::IPN(ua => $ua) or die Business::PayPal::IPN->error();
 
 unless( $ipn->completed ) {
 	&log( "received incomplete txn" );
@@ -16,10 +28,6 @@ unless( $ipn->completed ) {
 
 # respond to paypal
 print $ipn->cgi->header('text/plain');
-
-my $eprints = EPrints->new;
-my $repo = $eprints->current_repository;
-exit( 0 ) unless( defined $repo );
 
 # check the receiver_email
 unless( $ipn->receiver_email eq $repo->config( qw( paypal merchantid ) ) )
