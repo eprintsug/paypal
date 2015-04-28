@@ -1,4 +1,4 @@
-package EPrints::Plugin::Screen::Paypal;
+package EPrints::Plugin::Screen::PaypalCart;
 
 use EPrints::Plugin::Screen;
 
