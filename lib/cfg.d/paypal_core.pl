@@ -1,7 +1,3 @@
-
-# On completion of a transaction you can get a payment notification (IPN) on a callback URL
-$c->{paypal}->{callback} = $c->{base_url} . '/paypal/callback';
-
 $c->{paypal}->{button} = sub {
 	my( $user, $doc ) = @_;
 

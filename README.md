@@ -40,6 +40,10 @@ In order to install from https://github.com/eprintsug/paypal/ you must have [git
 * restart your webserver
 * start selling!
 
+## Setup
+
+Add the IPN callback to your Paypal account: http://your.repository/cgi/paypal/callback
+
 ## Configuration
 Three files need to be customized. Such modifications depend on the level of customization of your repository. Here we present the situation compared to the originals you can find in ``` lib/defaultcfg ```
 
