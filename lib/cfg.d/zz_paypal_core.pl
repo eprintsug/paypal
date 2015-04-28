@@ -59,13 +59,13 @@ $c->{paypal}->{get_order_for_document} = sub {
 };
 
 # orders are a subobject of user
-$c->add_dataset_field( "user", { name => "paypal_orders", type=>"subobject", datasetid=>"paypal_order", multiple=>1, text_index=>1, dataobj_fieldname=>"eprintid" } );
+$c->add_dataset_field( "user", { name => "paypal_orders", type=>"subobject", datasetid=>"paypal_order", multiple=>1, text_index=>1, dataobj_fieldname=>"userid", dataset_fieldname => "" } );
 
 $c->{datasets}->{paypal_order} = {
 	class => "EPrints::DataObj::PaypalOrder",
 	sqlname => "paypal_order",
 	name => "paypal_order",
-	columns => [qw( tx_id payment_date num_cart_items )],
+	columns => [qw( txn_id payment_date num_cart_items mc_gross )],
 	index => 1,
 	import => 1,
 #	search => {
