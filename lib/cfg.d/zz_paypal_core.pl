@@ -1,3 +1,13 @@
+$c->{roles}->{paypal_buyer} = [qw{
+	+paypal_order/view:owner
+}];
+$c->{roles}->{paypal_admin} = [qw{
+	+paypal_order/view
+}];
+push @{ $c->{user_roles}->{user} }, qw( paypal_buyer );
+push @{ $c->{user_roles}->{editor} }, qw( paypal_admin );
+push @{ $c->{user_roles}->{admin} }, qw( paypal_admin );
+
 $c->{paypal}->{button} = sub {
 	my( $user, $doc ) = @_;
 
