@@ -14,5 +14,5 @@ $c->{paypal}->{price} = sub {
 # into your PayPal account and visiting your profile, or your email address.
 $c->{paypal}->{merchantid} = '';
 
-$c->{plugins}{'Screen::Paypal'}{params}{disable} = 0;
+$c->{plugins}{'Screen::PaypalCart'}{params}{disable} = 0;
 $c->{plugins}{'Screen::PaypalOrders'}{params}{disable} = 0;

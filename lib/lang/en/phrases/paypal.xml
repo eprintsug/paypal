@@ -3,8 +3,8 @@
 
 <epp:phrases xmlns="http://www.w3.org/1999/xhtml" xmlns:epp="http://eprints.org/ep3/phrase" xmlns:epc="http://eprints.org/ep3/control">
 
-<epp:phrase id="Plugin/Screen/Paypal:title">Paypal Checkout</epp:phrase>
-<epp:phrase id="Plugin/Screen/Paypal:btn">
+<epp:phrase id="Plugin/Screen/PaypalCart:title">Paypal Checkout</epp:phrase>
+<epp:phrase id="Plugin/Screen/PaypalCart:btn">
 	<form name="_xclick" target="paypal" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
 		<input type="hidden" name="cmd" value="_cart"/>
 		<input type="hidden" name="business" value="{$config{paypal}{merchantid}}"/>
