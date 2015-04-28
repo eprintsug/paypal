@@ -15,5 +15,4 @@ $c->{paypal}->{price} = sub {
 $c->{paypal}->{merchantid} = '';
 
 $c->{plugins}{'Screen::Paypal'}{params}{disable} = 0;
-$c->{plugins}{'Screen::EPrint::Box::Paypal'}{params}{disable} = 0;
-
+$c->{plugins}{'Screen::PaypalOrders'}{params}{disable} = 0;
