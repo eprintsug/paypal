@@ -16,3 +16,4 @@ $c->{paypal}->{merchantid} = '';
 
 $c->{plugins}{'Screen::PaypalCart'}{params}{disable} = 0;
 $c->{plugins}{'Screen::PaypalOrders'}{params}{disable} = 0;
+$c->{plugins}{'Export::PaypalZip'}{params}{disable} = 0;

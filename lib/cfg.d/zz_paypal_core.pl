@@ -1,6 +1,7 @@
 $c->{roles}->{paypal_user} = [qw{
 	+paypal_order/view:owner
 	+paypal_order/details:owner
+	+paypal_order/export:owner
 }];
 $c->{roles}->{paypal_admin} = [qw{
 	+paypal_order/view
