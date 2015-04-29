@@ -1,10 +1,12 @@
-$c->{roles}->{paypal_buyer} = [qw{
+$c->{roles}->{paypal_user} = [qw{
 	+paypal_order/view:owner
+	+paypal_order/details:owner
 }];
 $c->{roles}->{paypal_admin} = [qw{
 	+paypal_order/view
+	+paypal_order/details
 }];
-push @{ $c->{user_roles}->{user} }, qw( paypal_buyer );
+push @{ $c->{user_roles}->{user} }, qw( paypal_user );
 push @{ $c->{user_roles}->{editor} }, qw( paypal_admin );
 push @{ $c->{user_roles}->{admin} }, qw( paypal_admin );
 
@@ -100,12 +102,13 @@ push @{ $c->{paypal}->{profile} },
 	{ sub_name => "name", type => "text" },
 	{ sub_name => "number", type => "text" },
 	{ sub_name => "gross", type => "text" },
+	{ sub_name => "document", type => "itemref", datasetid => "document", render_single_value => "EPrints::DataObj::PaypalOrder::render_document" },
 ]},
 { name => "num_cart_items", type => "int" },
 { name => "payment_date", type => "time" },
 { name => "mc_currency", type => "text" },
 { name => "mc_gross", type => "text" },
-{ name => "_raw", type => "longtext" },
+{ name => "_raw", type => "longtext", show_in_html => 0 },
 ;
 
 for(  @{ $c->{paypal}->{profile} } )
@@ -126,5 +129,13 @@ sub get_system_field_info
 }
 
 sub get_dataset_id { "paypal_order" }
+
+sub render_document
+{
+	my( $repo, $field, $value, $alllangs, $nolink, $order ) = @_;
+
+	my $doc = $repo->dataset( "document" )->dataobj( $value );
+	return defined $doc ? $doc->render_icon_link : $repo->xml->create_document_fragment;
+}
 
 } # end package

@@ -55,6 +55,12 @@ if( $list->count )
 	exit;
 }
 
+# check for valid userid
+unless( EPrints::Utils::is_set( $ipn->custom ) && defined $repo->dataset( "user" )->dataobj( $ipn->custom ) )
+{
+	&log( "invalid userid in custom field" );
+}
+
 # TODO check that payment amount and currency are correct
 # foreach item, check mc_gross_x
 
@@ -68,8 +74,8 @@ foreach my $field ( $repo->dataset( "paypal_order" )->fields )
 
 	if( $name eq "payment_date" )
 	{
-		my $s = str2time( $ipn->payment_date ); # epoch seconds
-		$epdata{$name} = EPrints::Time::iso_datetime( EPrints::Time::local_datetime( $s ) );
+		$epdata{payment_date} = EPrints::Time::iso_datetime( str2time( $ipn->payment_date ) );
+		next;
 	}
 
 	$epdata{$name} = $ipndata{$name};
@@ -81,7 +87,9 @@ $epdata{userid} = $ipn->custom;
 my @items;
 for( 1..$ipn->num_cart_items )
 {
+	next unless $ipndata{"item_number$_"} =~ /([0-9]+)$/;
 	push @items, {
+		document => $1,
 		name => $ipndata{"item_name$_"},
 		number => $ipndata{"item_number$_"},
 		gross => $ipndata{"mc_gross_$_"},

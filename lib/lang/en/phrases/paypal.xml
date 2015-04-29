@@ -26,11 +26,12 @@
 <epp:phrase id="paypal_order_fieldname_payment_date">Date</epp:phrase>
 <epp:phrase id="paypal_order_fieldname_num_cart_items">Items ordered</epp:phrase>
 <epp:phrase id="paypal_order_fieldname_mc_gross">Order total</epp:phrase>
-<epp:phrase id="paypal_order_fieldname_mc_currency">Order total</epp:phrase>
+<epp:phrase id="paypal_order_fieldname_mc_currency">Currency</epp:phrase>
 <epp:phrase id="paypal_order_fieldname_items">Items</epp:phrase>
 <epp:phrase id="paypal_order_fieldname_items_name">Name</epp:phrase>
-<epp:phrase id="paypal_order_fieldname_items_number">Ref</epp:phrase>
+<epp:phrase id="paypal_order_fieldname_items_number">ID</epp:phrase>
 <epp:phrase id="paypal_order_fieldname_items_gross">Price</epp:phrase>
+<epp:phrase id="paypal_order_fieldname_items_document">Download</epp:phrase>
 <epp:phrase id="paypal_order_fieldname_payer_email">Buyer ID</epp:phrase>
 <epp:phrase id="paypal_order_fieldname_userid">User</epp:phrase>
 <epp:phrase id="paypal_order_fieldname__raw">Callback data</epp:phrase>
