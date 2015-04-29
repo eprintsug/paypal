@@ -84,7 +84,7 @@ for( 1..$ipn->num_cart_items )
 	push @items, {
 		name => $ipndata{"item_name$_"},
 		number => $ipndata{"item_number$_"},
-		gross => $ipndata{"mc_gross$_"},
+		gross => $ipndata{"mc_gross_$_"},
 	}
 }
 $epdata{items} = \@items;
