@@ -138,4 +138,23 @@ sub render_document
 	return defined $doc ? $doc->render_icon_link : $repo->xml->create_document_fragment;
 }
 
+sub has_owner
+{
+	my( $self, $possible_owner ) = @_;
+
+	if( $possible_owner->get_value( "userid" ) == $self->get_value( "userid" ) )
+	{
+		return 1;
+	}
+
+	return 0;
+}
+
+sub parent
+{
+	my( $self ) = @_;
+
+	return $self->{repository}->user( $self->value( "userid" ) );
+}
+
 } # end package
