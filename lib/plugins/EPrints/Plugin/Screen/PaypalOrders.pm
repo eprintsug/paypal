@@ -29,8 +29,8 @@ sub new
 sub can_be_viewed
 {
 	my( $self ) = @_;
-return 1;
-	return $self->allow( "paypal_order" );
+
+	return defined $self->{repository}->current_user;
 }
 
 sub from
