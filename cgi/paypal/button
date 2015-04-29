@@ -4,9 +4,6 @@ use strict;
 my $repo = EPrints->new->current_repository;
 exit if !defined $repo;
 
-my $user = $repo->current_user;
-exit unless defined $user;
-
 my $docid = $repo->param( "docid" );
 exit unless EPrints::Utils::is_set( $docid );
 
@@ -18,7 +15,7 @@ exit unless $doc->value( "security" ) eq "paypal";
 my $eprint = $doc->parent;
 exit unless defined $eprint && $eprint->value( "eprint_status" ) eq "archive";
 
-my $button = $repo->call([qw( paypal button )], $user, $doc );
+my $button = $repo->call([qw( paypal button )], $repo->current_user, $doc );
 exit unless defined $button;
 
 binmode(STDOUT, ":utf8");

@@ -11,11 +11,18 @@ push @{ $c->{user_roles}->{admin} }, qw( paypal_admin );
 $c->{paypal}->{button} = sub {
 	my( $user, $doc ) = @_;
 
-	my $repo = $user->repository;
+	my $repo = $doc->repository;
 
-	unless( defined $user && defined $doc )
+	unless( defined $doc )
 	{
 		return $repo->xml->create_doc_fragment;
+	}
+
+	unless( defined $user )
+	{
+		return $doc->render_citation( "paypal_login",
+			eprint => [ $doc->parent ],
+		);
 	}
 
 	if( $repo->call( [qw( paypal can_user_view_document )], $user, $doc ) )
