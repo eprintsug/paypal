@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<epm xmlns='http://eprints.org/ep2/data/2.0' id='http://localhost/id/epm/paypal'>
+<epm id='http://drtjmb.com/id/epm/paypal' xmlns='http://eprints.org/ep2/data/2.0'>
   <epmid>paypal</epmid>
   <uri>http://localhost/id/epm/paypal</uri>
   <documents>
@@ -9,58 +9,154 @@
           <datasetid>document</datasetid>
           <filename>epm/paypal/cfg/cfg.d/paypal.pl</filename>
           <mime_type>text/plain</mime_type>
-          <hash>007028d3c4d020e7cb20a6dc62978230</hash>
+          <hash>4e6548ec2ac898c8763c2b68818608aa</hash>
           <hash_type>MD5</hash_type>
-          <filesize>599</filesize>
+          <filesize>650</filesize>
         </file>
         <file>
           <datasetid>document</datasetid>
-          <filename>citations/eprint/paypal.xml</filename>
+          <filename>citations/paypal_order/default.xml</filename>
           <mime_type>application/xml</mime_type>
-          <hash>257f61b21fd41bf75392284239e1a1c7</hash>
+          <hash>cbbf60f4913edbae29b412b601fb0f6b</hash>
           <hash_type>MD5</hash_type>
-          <filesize>599</filesize>
+          <filesize>324</filesize>
         </file>
         <file>
           <datasetid>document</datasetid>
-          <filename>plugins/EPrints/Plugin/Screen/Paypal.pm</filename>
-          <mime_type>text/plain</mime_type>
-          <hash>cf279199241f0ce00c1582ab33cd783b</hash>
+          <filename>citations/document/paypal_admin.xml</filename>
+          <mime_type>application/xml</mime_type>
+          <hash>16aa30bf114b7b187a2e4c1d25ed8a73</hash>
           <hash_type>MD5</hash_type>
-          <filesize>454</filesize>
+          <filesize>422</filesize>
         </file>
         <file>
           <datasetid>document</datasetid>
-          <filename>plugins/EPrints/Plugin/Screen/EPrint/Box/Paypal.pm</filename>
-          <mime_type>text/plain</mime_type>
-          <hash>565926da4afd6fea672950417313277d</hash>
+          <filename>citations/document/paypal_purchased.xml</filename>
+          <mime_type>application/xml</mime_type>
+          <hash>a23532cb9b389f68c4f29381ce3c5bbd</hash>
           <hash_type>MD5</hash_type>
-          <filesize>1187</filesize>
+          <filesize>474</filesize>
+        </file>
+        <file>
+          <datasetid>document</datasetid>
+          <filename>citations/document/paypal_login.xml</filename>
+          <mime_type>application/xml</mime_type>
+          <hash>cdf1ee2f7bb2f717d30bca9dbe6d2cf8</hash>
+          <hash_type>MD5</hash_type>
+          <filesize>366</filesize>
+        </file>
+        <file>
+          <datasetid>document</datasetid>
+          <filename>citations/document/paypal_button.xml</filename>
+          <mime_type>application/xml</mime_type>
+          <hash>fcf0e8e32d59eae4c82aeec5b61e84ca</hash>
+          <hash_type>MD5</hash_type>
+          <filesize>1186</filesize>
+        </file>
+        <file>
+          <datasetid>document</datasetid>
+          <filename>plugins/Business/PayPal/IPN.pm</filename>
+          <mime_type>text/plain</mime_type>
+          <hash>c4909edfef800732cb827c0a51b04f6f</hash>
+          <hash_type>MD5</hash_type>
+          <filesize>15576</filesize>
+        </file>
+        <file>
+          <datasetid>document</datasetid>
+          <filename>plugins/Business/PayPal/README</filename>
+          <mime_type>text/plain</mime_type>
+          <hash>a59f9a1fab87b97cec7aa85bbfdc0367</hash>
+          <hash_type>MD5</hash_type>
+          <filesize>10207</filesize>
+        </file>
+        <file>
+          <datasetid>document</datasetid>
+          <filename>plugins/EPrints/Plugin/Screen/PaypalOrders.pm</filename>
+          <mime_type>text/plain</mime_type>
+          <hash>e7c809b2a2cea22119785f3ac90187de</hash>
+          <hash_type>MD5</hash_type>
+          <filesize>752</filesize>
+        </file>
+        <file>
+          <datasetid>document</datasetid>
+          <filename>plugins/EPrints/Plugin/Screen/PaypalCart.pm</filename>
+          <mime_type>text/plain</mime_type>
+          <hash>ffb40afdd704f5f8d112cbc8172536fd</hash>
+          <hash_type>MD5</hash_type>
+          <filesize>498</filesize>
+        </file>
+        <file>
+          <datasetid>document</datasetid>
+          <filename>plugins/EPrints/Plugin/Export/PaypalZip.pm</filename>
+          <mime_type>text/plain</mime_type>
+          <hash>0b574df244a6d0c8b3b4e1ddabcae2fc</hash>
+          <hash_type>MD5</hash_type>
+          <filesize>1317</filesize>
         </file>
         <file>
           <datasetid>document</datasetid>
           <filename>lang/en/phrases/paypal.xml</filename>
           <mime_type>application/xml</mime_type>
-          <hash>aa2f8e148925dd18e0fd25acaa54c673</hash>
+          <hash>4a029a6eb8bab3c47c992d6ec0dedcdc</hash>
           <hash_type>MD5</hash_type>
-          <filesize>1346</filesize>
+          <filesize>2168</filesize>
         </file>
         <file>
           <datasetid>document</datasetid>
-          <filename>static/javascript/paypal-button.min.js</filename>
+          <filename>cfg.d/zz_paypal_core.pl</filename>
           <mime_type>text/plain</mime_type>
-          <hash>80f4bd60518820fa585e4b1add80a99e</hash>
+          <hash>c270423228cbd6f0c4fa8194dd975489</hash>
           <hash_type>MD5</hash_type>
-          <filesize>12386</filesize>
+          <filesize>4405</filesize>
+        </file>
+        <file>
+          <datasetid>document</datasetid>
+          <filename>static/javascript/auto/paypal.js</filename>
+          <mime_type>text/plain</mime_type>
+          <hash>40914b0ed37d3829f26e63a133def61a</hash>
+          <hash_type>MD5</hash_type>
+          <filesize>346</filesize>
+        </file>
+        <file>
+          <datasetid>document</datasetid>
+          <filename>static/style/auto/paypal.css</filename>
+          <mime_type>text/plain</mime_type>
+          <hash>bb48053eaa0f21f7d7b8ca1b863b0b2e</hash>
+          <hash_type>MD5</hash_type>
+          <filesize>126</filesize>
+        </file>
+        <file>
+          <datasetid>document</datasetid>
+          <filename>workflows/paypal_order/default.xml</filename>
+          <mime_type>application/xml</mime_type>
+          <hash>3d972f948943dfcb3b2e44da80fb0cd5</hash>
+          <hash_type>MD5</hash_type>
+          <filesize>221</filesize>
+        </file>
+        <file>
+          <datasetid>document</datasetid>
+          <filename>epm/paypal/cgi/paypal/button</filename>
+          <mime_type>text/plain</mime_type>
+          <hash>6cb580a6f78fd4de28798f8b0c6ebf29</hash>
+          <hash_type>MD5</hash_type>
+          <filesize>701</filesize>
+        </file>
+        <file>
+          <datasetid>document</datasetid>
+          <filename>epm/paypal/cgi/paypal/callback</filename>
+          <mime_type>text/plain</mime_type>
+          <hash>d3f15c58085884b30b7a90191d20bc8f</hash>
+          <hash_type>MD5</hash_type>
+          <filesize>2521</filesize>
         </file>
       </files>
       <mime_type>text/plain</mime_type>
       <format>text</format>
-      <main>static/javascript/paypal-button.min.js</main>
+      <main>epm/paypal/cgi/paypal/callback</main>
       <content>install</content>
     </document>
   </documents>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
   <creators>
     <item>
       <name>
@@ -70,7 +166,7 @@
       <id>drtjmb@gmail.com</id>
     </item>
   </creators>
-  <datestamp>2015-04-08 20:49:33</datestamp>
+  <datestamp>2015-04-30 00:05:31</datestamp>
   <title>Paypal</title>
   <home_page>http://github.com/eprintsug/paypal</home_page>
 </epm>
