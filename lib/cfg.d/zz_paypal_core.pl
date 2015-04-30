@@ -39,8 +39,8 @@ $c->{paypal}->{button} = sub {
 	{
 		# 'you purchased this on...'
 		return $doc->render_citation( "paypal_purchased",
-			payment_date => $order->render_value( "payment_date" ),
-			link => $repo->xml->render_link( $order->uri ),
+			payment_date => [ EPrints::XML::to_string( $order->render_value( "payment_date" ) ), "STRING" ],
+			link => [ $order->get_control_url, "STRING" ],
 		);
 	}
 
@@ -70,7 +70,7 @@ $c->{paypal}->{get_order_for_document} = sub {
 	my $list = $repo->dataset( "paypal_order" )->search(
 		filters => [
 			{ meta_fields => [qw( userid )], value => $user->get_id, match => "EX" },
-			{ meta_fields => [qw( items_number )], value => $doc->get_id, match => "EX" },
+			{ meta_fields => [qw( items_document )], value => $doc->get_id, match => "EX" },
 		],
 	);
 
@@ -106,7 +106,7 @@ push @{ $c->{paypal}->{profile} },
 	{ sub_name => "document", type => "itemref", datasetid => "document", render_single_value => "EPrints::DataObj::PaypalOrder::render_document" },
 ]},
 { name => "num_cart_items", type => "int" },
-{ name => "payment_date", type => "time" },
+{ name => "payment_date", type => "time", render_style => "short" },
 { name => "mc_currency", type => "text" },
 { name => "mc_gross", type => "text" },
 { name => "_raw", type => "longtext", show_in_html => 0 },
@@ -156,6 +156,13 @@ sub parent
 	my( $self ) = @_;
 
 	return $self->{repository}->user( $self->value( "userid" ) );
+}
+
+sub get_control_url
+{
+	my( $self ) = @_;
+
+	return $self->{session}->get_repository->get_conf( "http_cgiurl" )."/users/home?screen=Workflow::View&dataset=".$self->get_dataset_id."&dataobj=".$self->get_id;
 }
 
 } # end package
