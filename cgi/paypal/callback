@@ -59,6 +59,7 @@ if( $list->count )
 unless( EPrints::Utils::is_set( $ipn->custom ) && defined $repo->dataset( "user" )->dataobj( $ipn->custom ) )
 {
 	&log( "invalid userid in custom field" );
+	exit;
 }
 
 # TODO check that payment amount and currency are correct
@@ -100,7 +101,7 @@ $epdata{items} = \@items;
 my $order = $repo->dataset( "paypal_order" )->create_dataobj( \%epdata );
 unless( defined $order )
 {
-	&log( "failed to created paypal_order dataobj" );
+	&log( "failed to create paypal_order dataobj" );
 	exit;
 }
 
