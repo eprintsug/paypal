@@ -13,6 +13,7 @@ $c->{paypal}->{price} = sub {
 # This ID can either be your Secure Merchant ID, which can be found by logging 
 # into your PayPal account and visiting your profile, or your email address.
 $c->{paypal}->{merchantid} = '';
+$c->{paypal}->{ipn} = $c->{"perl_url"} . '/paypal/callback/';
 
 $c->{plugins}{'Screen::PaypalCart'}{params}{disable} = 0;
 $c->{plugins}{'Screen::PaypalOrders'}{params}{disable} = 0;
