@@ -10,6 +10,11 @@ In order to install from https://github.com/eprintsug/paypal/ you must have [git
     ```
     git submodule add https://github.com/eprintsug/paypal.git lib/epm/paypal 
     ```
+    use the -f option if you are using the standard eprints installation:
+    
+    ```
+    git submodule add -f https://github.com/eprintsug/paypal.git lib/epm/paypal 
+    ```
 * generate paypal.epmi
 
     ```
