@@ -17,7 +17,7 @@ if ( $repo->config( "proxy" )){
 }
 
 # use sandbox
-$Business::PayPal::IPN::GTW = 'https://www.sandbox.paypal.com/cgi-bin/webscr';
+$Business::PayPal::IPN::GTW = 'https://ipnpb.sandbox.paypal.com/cgi-bin/webscr';
 
 my $ipn = new Business::PayPal::IPN(ua => $ua) or die Business::PayPal::IPN->error();
 
